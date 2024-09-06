@@ -1,1 +1,4 @@
-preset: psr2
+php:
+  preset: laravel
+js: true
+css: true
