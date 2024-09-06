@@ -1,33 +1,34 @@
 <?php
+
 return [
 
-	/*
-	 * The URL to call for API functionalities
-	 */
-	'url' => 'https://api.qapla.it/1.1/',
+    /*
+     * The URL to call for API functionalities
+     * @deprecated and will be updated in the next release
+     */
+    'url' => 'https://api.qapla.it/1.1/',
 
-	/*
-	 * SHIPMENTS
-	 * Config parameters
-	 */
-	'tracks' => [
-		'default_fromDate'  => '1970-01-01 00:00:00',   // Get shipments from 1970 to today = ALL
-	],
+    /*
+     * Get shipments from a specific datetime.
+     * Default is from 1970 its is the first date of the Unix Epoch
+     */
+    'tracks' => [
+        'default_fromDate'  => '1970-01-01 00:00:00',
+    ],
 
-	/*
-	 * ORDERS
-	 * Config parameters
-	 */
-	'orders' => [
-		'default_fromDate'  => '1970-01-01 00:00:00',   // Get orders from 1970 to today = ALL
-	],
+    /*
+     * Get orders from a specific datetime.
+     * Default is from 1970 its is the first date of the Unix Epoch
+     */
+    'orders' => [
+        'default_fromDate'  => '1970-01-01 00:00:00',
+    ],
 
-	/*
-	 * COURIERS
-	 * Config parameters
-	 */
-	'couriers' => [
-		'default_country' => 'it,global'
-	]
+    /*
+     * Default country for couriers
+     */
+    'couriers' => [
+        'default_country' => 'it,global',
+    ],
 
 ];
