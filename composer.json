@@ -24,22 +24,24 @@
         }
     ],
     "require": {
-        "illuminate/support": "~5.1|~6.0|~7.0|~8.0",
+        "illuminate/support": "~5.1|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
         "php" : "^5.6|^7.0|^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit" : ">=5.4.3",
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "mockery/mockery": "~1.3.3|^1.4.2",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": ">=5.4.3",
         "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
         "psr-4": {
-            "W3design\\Qapla\\": "src"
+            "W3design\\Qapla\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "W3design\\Qapla\\": "tests",
-            "Tests\\": "tests/"
+            "W3design\\Qapla\\Tests\\": "tests/"
         }
     },
     "scripts": {
