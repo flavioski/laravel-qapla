@@ -12,14 +12,20 @@
     "authors": [
         {
             "name": "W3design",
-            "email": "michele@w3design.it",
-            "homepage": "http://www.w3design.it",
+            "email": "info@w3design.it",
+            "homepage": "https://www.w3design.it",
+            "role": "Developer"
+        },
+        {
+            "name": "Flavio Pellizzer",
+            "email": "flavio@w3design.it",
+            "homepage": "https://www.w3design.it",
             "role": "Developer"
         }
     ],
     "require": {
-        "illuminate/support": "~5.1",
-        "php" : "~5.6|~7.0"
+        "illuminate/support": "~5.1|~6.0|~7.0|~8.0",
+        "php" : "^5.6|^7.0|^8.0"
     },
     "require-dev": {
         "phpunit/phpunit" : ">=5.4.3",
@@ -32,7 +38,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "W3design\\Qapla\\": "tests"
+            "W3design\\Qapla\\": "tests",
+            "Tests\\": "tests/"
         }
     },
     "scripts": {
