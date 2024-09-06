@@ -1,5 +1,7 @@
-/build/
+/build
+/docs
+/vendor
 composer.lock
-/docs/
-/vendor/
 .idea
+/phpunit.xml
+.phpunit.result.cache
