@@ -56,6 +56,8 @@ class Qapla
      * @param string $lang
      *
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function getTrack($tracking_or_reference = 'trackingNumber', $value, $lang = 'ita')
     {
@@ -77,6 +79,8 @@ class Qapla
      * @param $data
      *
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function pushTrack($data)
     {
@@ -99,6 +103,8 @@ class Qapla
      * @param null $date_or_days
      *
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function getTracks($date_or_days = null)
     {
@@ -125,6 +131,8 @@ class Qapla
      * @param $trackingNumber
      *
      * @return bool
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function deleteTrack($trackingNumber)
     {
@@ -145,6 +153,8 @@ class Qapla
      * @param null $date_or_days
      *
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function getOrders($date_or_days = null)
     {
@@ -171,6 +181,8 @@ class Qapla
      * @param $data
      *
      * @return bool
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function pushOrder($data)
     {
@@ -194,6 +206,8 @@ class Qapla
     /**
      * Return the amount of the remaining credits on your premium account
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function getCredits()
     {
@@ -213,6 +227,8 @@ class Qapla
      * @param null $country
      *
      * @return mixed
+     *
+     * @deprecated and will be removed in the next major version.
      */
     public function getCouriers($country = null)
     {
