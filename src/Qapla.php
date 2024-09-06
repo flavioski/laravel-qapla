@@ -63,15 +63,16 @@ class Qapla
     public function getTrack($tracking_or_reference = 'trackingNumber', $value, $lang = 'ita')
     {
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'getTrack/', ['query' =>  [
+        $res = $client->get(config('qapla.url') . 'getTrack/', ['query' =>  [
             'apiKey' => $this->privateApiKey,
             $tracking_or_reference => $value,
-            'lang' => $lang]
+            'lang' => $lang, ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->getTrack->result == 'KO') {
             return $result->getTrack->error;
         }
+
         return $result->getTrack;
     }
 
@@ -86,16 +87,17 @@ class Qapla
     public function pushTrack($data)
     {
         $json ='{
-		    "apiKey": "'.$this->privateApiKey.'",
-		    "pushTrack": '.json_encode($data).'
+		    "apiKey": "' . $this->privateApiKey . '",
+		    "pushTrack": ' . json_encode($data) . '
 		}';
 
         $client = new GuzzleHttp\Client();
-        $res = $client->post(config('qapla.url').'pushTrack/', [
+        $res = $client->post(config('qapla.url') . 'pushTrack/', [
             'headers' => ['content-type' => 'application/json'],
-            'body' => $json
+            'body' => $json,
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
+
         return $result->pushTrack->track;
     }
 
@@ -116,14 +118,15 @@ class Qapla
         }
 
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'getTracks/', ['query' =>  [
+        $res = $client->get(config('qapla.url') . 'getTracks/', ['query' =>  [
             'apiKey'    => $this->privateApiKey,
-            $param_name => $date_or_days]
+            $param_name => $date_or_days, ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->getTracks->result == 'KO') {
             return $result->getTracks->error;
         }
+
         return $result->getTracks->tracks;
     }
 
@@ -138,14 +141,15 @@ class Qapla
     public function deleteTrack($trackingNumber)
     {
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'deleteTrack/', ['query' =>  [
+        $res = $client->get(config('qapla.url') . 'deleteTrack/', ['query' =>  [
             'apiKey'            => $this->privateApiKey,
-            'trackingNumber'    => $trackingNumber]
+            'trackingNumber'    => $trackingNumber, ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->deleteTrack->result == 'KO') {
             return $result->deleteTrack->error;
         }
+
         return true;
     }
 
@@ -166,14 +170,15 @@ class Qapla
         }
 
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'getOrders/', ['query' =>  [
+        $res = $client->get(config('qapla.url') . 'getOrders/', ['query' =>  [
             'apiKey'    => $this->privateApiKey,
-            $param_name => $date_or_days]
+            $param_name => $date_or_days, ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->getOrders->result == 'KO') {
             return $result->getOrders->error;
         }
+
         return $result->getOrders->orders;
     }
 
@@ -188,19 +193,20 @@ class Qapla
     public function pushOrder($data)
     {
         $json ='{
-		    "apiKey": "'.$this->privateApiKey.'",
-		    "pushOrder": '.json_encode($data).'
+		    "apiKey": "' . $this->privateApiKey . '",
+		    "pushOrder": ' . json_encode($data) . '
 		}';
 
         $client = new GuzzleHttp\Client();
-        $res = $client->post(config('qapla.url').'pushOrder/', [
+        $res = $client->post(config('qapla.url') . 'pushOrder/', [
             'headers' => ['content-type' => 'application/json'],
-            'body' => $json
+            'body' => $json,
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->pushOrder->result == 'KO') {
             return $result->pushOrder->error;
         }
+
         return true;
     }
 
@@ -213,13 +219,14 @@ class Qapla
     public function getCredits()
     {
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'getCredits/', ['query' =>  [
-            'apiKey' => $this->privateApiKey]
+        $res = $client->get(config('qapla.url') . 'getCredits/', ['query' =>  [
+            'apiKey' => $this->privateApiKey, ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->getCredits->result == 'KO') {
             return $result->getCredits->error;
         }
+
         return $result->getCredits->credits;
     }
 
@@ -234,14 +241,15 @@ class Qapla
     public function getCouriers($country = null)
     {
         $client = new GuzzleHttp\Client();
-        $res = $client->get(config('qapla.url').'getCouriers/', ['query' =>  [
+        $res = $client->get(config('qapla.url') . 'getCouriers/', ['query' =>  [
             'apiKey'    => $this->privateApiKey,
-            'country'   => $country ?: config('qapla.couriers.default_country')]
+            'country'   => $country ?: config('qapla.couriers.default_country'), ],
         ]);
         $result = GuzzleHttp\json_decode($res->getBody());
         if ($result->getCouriers->result == 'KO') {
             return $result->getCouriers->error;
         }
+
         return $result->getCouriers->courier;
     }
 }

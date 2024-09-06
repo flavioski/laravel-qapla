@@ -32,7 +32,7 @@ class QaplaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('qapla.php'),
+            __DIR__ . '/../config/config.php' => config_path('qapla.php'),
         ], 'config');
     }
 
@@ -41,6 +41,6 @@ class QaplaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'qapla');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'qapla');
     }
 }
