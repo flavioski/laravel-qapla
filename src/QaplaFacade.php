@@ -1,5 +1,6 @@
 <?php
 namespace W3design\Qapla;
+
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -8,13 +9,13 @@ use Illuminate\Support\Facades\Facade;
  */
 class QaplaFacade extends Facade
 {
-	/**
-	 * Get the registered name of the component.
-	 *
-	 * @return string
-	 */
-	protected static function getFacadeAccessor()
-	{
-		return 'qapla';
-	}
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'qapla';
+    }
 }
