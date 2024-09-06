@@ -18,6 +18,7 @@
  * @copyright Since 2024 Flavio Pellizzer
  * @license   https://opensource.org/licenses/MIT
  */
+declare(strict_types=1);
 
 namespace W3design\Qapla;
 
