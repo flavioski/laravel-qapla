@@ -8,21 +8,21 @@ body:
     attributes:
       label: Laravel Qapla Version
       description: Provide the Qapla version that you are using.
-      placeholder: 1.0
+      placeholder: 1.0.0
     validations:
       required: true
   - type: input
     attributes:
       label: Laravel Version
       description: Provide the Laravel version that you are using. [Please ensure it is still supported.](https://laravel.com/docs/releases#support-policy)
-      placeholder: 5.4
+      placeholder: 6.0.0
     validations:
       required: true
   - type: input
     attributes:
       label: PHP Version
       description: Provide the PHP version that you are using.
-      placeholder: 7.1
+      placeholder: 7.2.1
     validations:
       required: true
   - type: input
