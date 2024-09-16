@@ -1,11 +1,5 @@
-includes:
-    - vendor/phpstan/phpstan-phpunit/extension.neon
-    - vendor/phpstan/phpstan-strict-rules/rules.neon
-
 parameters:
   level: 0
   paths:
     - config
     - src
-  ignoreErrors:
-    - "#Unsafe usage of new static\\(\\)#"

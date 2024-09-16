@@ -1,7 +1,7 @@
 {
     "name": "w3designweb/laravel-qapla",
     "type": "library",
-    "description": "Package to integrate Qapla API functionalities in your Laravel web application.",
+    "description": "Package to integrate Qapla' API functionalities in your Laravel web application.",
     "keywords": [
         "W3design",
         "Qapla",
@@ -25,7 +25,8 @@
     ],
     "require": {
         "illuminate/support": "~5.1|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-        "php" : "^7.0|^8.0"
+        "php" : "^7.0|^8.0",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.4",
@@ -35,7 +36,7 @@
         "phpstan/phpstan-deprecation-rules": "^1.2",
         "phpstan/phpstan-phpunit": "^1.4",
         "phpstan/phpstan-strict-rules": "^1.6",
-        "phpunit/phpunit": ">=5.4.3",
+        "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^2.3"
     },
     "autoload": {
