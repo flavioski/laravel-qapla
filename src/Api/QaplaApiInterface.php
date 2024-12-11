@@ -24,6 +24,10 @@ namespace W3design\Qapla\Api;
 
 interface QaplaApiInterface
 {
+    public function getPrivateApiKey(): string;
+    public function setPrivateApiKey(string $privateApiKey): self;
+    public function getPublicApiKey(): string;
+    public function setPublicApiKey(string $publicApiKey): self;
     public function pushOrder(array $data): array;
     public function getOrder(string $reference): array;
     public function getOrders(): array;

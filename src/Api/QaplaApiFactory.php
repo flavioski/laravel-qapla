@@ -28,13 +28,14 @@ class QaplaApiFactory
     {
         $version = config('qapla.api_version', 12);
         $privateKey = config('qapla.private_api_key');
+        $publicKey = config('qapla.public_api_key');
 
         switch ($version) {
             case 13:
-                return new QaplaApiV13($privateKey);
+                return new QaplaApiV13($privateKey, $publicKey);
             case 12:
             default:
-                return new QaplaApiV12($privateKey);
+                return new QaplaApiV12($privateKey, $publicKey);
         }
     }
 }
