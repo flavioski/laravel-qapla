@@ -104,7 +104,7 @@ class QaplaApiV12 implements QaplaApiInterface
      *                     "price": float,
      *                     "total": float,
      *                     "isReturnable": bool,
-     *                     "notes": "string",
+     *                     "notes": "string"
      *                 }
      *             ],
      *             "sender": [
@@ -118,7 +118,7 @@ class QaplaApiV12 implements QaplaApiInterface
      *                 "email": "string",
      *                 "telephone": "string",
      *                 "referent": "string",
-     *                 "isDefault": bool,
+     *                 "isDefault": bool
      *             ],
      *             "PUDO": [
      *                 "id": "string",
@@ -129,10 +129,10 @@ class QaplaApiV12 implements QaplaApiInterface
      *                 "state": "string",
      *                 "country": "string",
      *                 "postalCode": "string",
-     *                 "description": "string",
+     *                 "description": "string"
      *             ],
      *             "invoice": {
-     *                 "number": "string",
+     *                 "number": "string"
      *             }
      *         }
      *     ]
