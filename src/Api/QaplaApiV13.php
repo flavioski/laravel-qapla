@@ -192,7 +192,7 @@ class QaplaApiV13 implements QaplaApiInterface
      *
      * @required string $apiKey
      * @required string $reference
-     * string $data
+     * @optional string $data
      *
      * @param $reference
      * @param $data
