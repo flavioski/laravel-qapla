@@ -10,24 +10,60 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
+        php-versions: ['7.4', '8.0']
+        laravel: ['6.*', '7.*', ' 8.*']
+        stability: [prefer-lowest, prefer-stable]
+        include:
+          - php-versions: '7.4'
+            laravel: '6.*'
+          - php-versions: '7.4'
+            laravel: '7.*'
+          - php-versions: '7.4'
+            laravel: '8.*'
+          - php-versions: '8.0'
+            laravel: '6.*'
+          - php-versions: '8.0'
+            laravel: '7.*'
+          - php-versions: '8.0'
+            laravel: '8.*'
 
-    name: PHP ${{ matrix.php-versions }}
+    name: PHP ${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php-versions }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php-versions }}-composer-
+            dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php-versions }}-
+            dependencies-laravel-${{ matrix.laravel }}-
+            dependencies-laravel-
+            dependencies-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: xdebug
 
       - name: Validate composer.json and composer.lock
         run: composer validate
 
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       #- name: Run test suite
       #  run: composer run-script test
