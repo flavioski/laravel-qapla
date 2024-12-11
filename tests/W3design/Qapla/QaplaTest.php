@@ -22,29 +22,22 @@ declare(strict_types=1);
 
 namespace W3design\Qapla;
 
-use GuzzleHttp;
-use W3design\Qapla\Api\QaplaApiFactory;
+use PHPUnit\Framework\TestCase;
 use W3design\Qapla\Api\QaplaApiInterface;
 
-class Qapla
+class QaplaTest extends TestCase
 {
-    private QaplaApiInterface $api;
-
-    /**
-     * Qapla' constructor.
-     */
-    public function __construct(?QaplaApiInterface $api = null)
+    public function testGetOrdersReturnsArray()
     {
-        if ($api === null) {
-            $factory = new QaplaApiFactory();
-            $api = $factory->createFromConfig();
-        }
+        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('getOrders')
+            ->willReturn([['id' => 1], ['id' => 2]]);
 
-        $this->api = $api;
-    }
+        $qapla = new Qapla($mockApi);
+        $orders = $qapla->getOrders();
 
-    public function getOrders(): array
-    {
-        return $this->api->getOrders();
+        $this->assertIsArray($orders);
+        $this->assertCount(2, $orders);
     }
 }
