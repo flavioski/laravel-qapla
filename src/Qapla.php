@@ -43,6 +43,28 @@ class Qapla
         $this->api = $api;
     }
 
+    public function getPrivateApiKey(): string
+    {
+        return $this->api->getPrivateApiKey();
+    }
+
+    public function setPrivateApiKey(string $privateApiKey): Qapla
+    {
+        $this->api->setPrivateApiKey($privateApiKey);
+        return $this;
+    }
+
+    public function getPublicApiKey(): string
+    {
+        return $this->api->getPublicApiKey();
+    }
+
+    public function setPublicApiKey(string $publicApiKey): Qapla
+    {
+        $this->api->setPublicApiKey($publicApiKey);
+        return $this;
+    }
+
     public function getOrders(): array
     {
         return $this->api->getOrders();
