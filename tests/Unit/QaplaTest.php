@@ -23,8 +23,8 @@ declare(strict_types=1);
 namespace Unit;
 
 use PHPUnit\Framework\TestCase;
-use W3design\Qapla\Qapla;
 use W3design\Qapla\Api\QaplaApiInterface;
+use W3design\Qapla\Qapla;
 
 class QaplaTest extends TestCase
 {

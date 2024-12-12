@@ -26,8 +26,8 @@ use Illuminate\Support\Facades\Config;
 use ReflectionClass;
 use W3design\Qapla\Api\QaplaApiV12;
 use W3design\Qapla\Api\QaplaApiV13;
-use W3design\Qapla\Tests\TestCase;
 use W3design\Qapla\Qapla;
+use W3design\Qapla\Tests\TestCase;
 
 class QaplaApiFactoryTest extends TestCase
 {
