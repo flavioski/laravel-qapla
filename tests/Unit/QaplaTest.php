@@ -30,7 +30,7 @@ class QaplaTest extends TestCase
 {
     public function testGetPrivateApiKey()
     {
-        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi = $this->createMock(QaplaApiInterface::class);
         $mockApi->expects($this->once())
             ->method('getPrivateApiKey')
             ->willReturn('private-key');
@@ -44,7 +44,7 @@ class QaplaTest extends TestCase
 
     public function testSetPrivateApiKey()
     {
-        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi = $this->createMock(QaplaApiInterface::class);
         $mockApi->expects($this->once())
             ->method('setPrivateApiKey')
             ->with('new-private-key');
@@ -55,7 +55,7 @@ class QaplaTest extends TestCase
 
     public function testGetPublicApiKey()
     {
-        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi = $this->createMock(QaplaApiInterface::class);
         $mockApi->expects($this->once())
             ->method('getPublicApiKey')
             ->willReturn('public-key');
@@ -69,7 +69,7 @@ class QaplaTest extends TestCase
 
     public function testSetPublicApiKey()
     {
-        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi = $this->createMock(QaplaApiInterface::class);
         $mockApi->expects($this->once())
             ->method('setPublicApiKey')
             ->with('new-public-key');
@@ -80,7 +80,7 @@ class QaplaTest extends TestCase
 
     public function testGetOrdersReturnsArray()
     {
-        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi = $this->createMock(QaplaApiInterface::class);
         $mockApi->expects($this->once())
             ->method('getOrders')
             ->willReturn([['id' => 1], ['id' => 2]]);
