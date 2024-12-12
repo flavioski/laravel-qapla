@@ -66,6 +66,11 @@ class Qapla
         return $this;
     }
 
+    public function getChannel(): array
+    {
+        return $this->api->getChannel();
+    }
+
     public function getOrders(): array
     {
         return $this->api->getOrders();

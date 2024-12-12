@@ -78,6 +78,19 @@ class QaplaTest extends TestCase
         $qapla->setPublicApiKey('new-public-key');
     }
 
+    public function testGetChannelReturnArray()
+    {
+        $mockApi = $this->createMock(QaplaApiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('getChannel')
+            ->willReturn(['id' => 1]);
+
+        $qapla = new Qapla($mockApi);
+        $channel = $qapla->getChannel();
+
+        $this->assertIsArray($channel);
+    }
+
     public function testGetOrdersReturnsArray()
     {
         $mockApi = $this->createMock(QaplaApiInterface::class);

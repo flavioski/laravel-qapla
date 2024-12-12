@@ -93,6 +93,39 @@ class QaplaApiV13 implements QaplaApiInterface
     }
 
     /**
+     * *getChannel*
+     *
+     * Allows you to retrieve the details of the channel associated with the API key
+     * in JSON format
+     *
+     * @api https://api.qapla.dev/1.2/#pushOrder
+     *
+     * @required string $apiKey
+     * @optional string $data
+     *
+     * @param string|null $data
+     * @return array
+     */
+    public function getChannel(string $data = null): array
+    {
+        try {
+            $response = $this->client->get('getChannel', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->privateApiKey,
+                ],
+                'query' => [
+                    'apiKey' => $this->privateApiKey,
+                    'data' => $data,
+                ],
+            ]);
+
+            return ['status' => $response->getStatusCode(), 'body' => $response->getBody()->getContents()];
+        } catch (GuzzleException $e) {
+            return ['status' => $e->getCode(), 'body' => $e->getMessage()];
+        }
+    }
+
+    /**
      * *pushOrder*
      *
      * Allows you to upload one or more orders via a POST of the data into Qapla'
