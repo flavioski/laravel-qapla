@@ -22,7 +22,6 @@ declare(strict_types=1);
 
 namespace W3design\Qapla;
 
-use GuzzleHttp;
 use W3design\Qapla\Api\QaplaApiFactory;
 use W3design\Qapla\Api\QaplaApiInterface;
 
@@ -51,6 +50,7 @@ class Qapla
     public function setPrivateApiKey(string $privateApiKey): Qapla
     {
         $this->api->setPrivateApiKey($privateApiKey);
+
         return $this;
     }
 
@@ -62,6 +62,7 @@ class Qapla
     public function setPublicApiKey(string $publicApiKey): Qapla
     {
         $this->api->setPublicApiKey($publicApiKey);
+
         return $this;
     }
 
