@@ -20,9 +20,10 @@
  */
 declare(strict_types=1);
 
-namespace W3design\Qapla\Api;
+namespace Unit\Api;
 
 use PHPUnit\Framework\TestCase;
+use W3design\Qapla\Api\QaplaApiV12;
 
 class QaplaApiV12Test extends TestCase
 {
@@ -59,7 +60,7 @@ class QaplaApiV12Test extends TestCase
 
     public function testGetOrdersIsArray()
     {
-        $api = new QaplaApiV12('your-api-key');
+        $api = new QaplaApiV12('your-private-api-key', 'your-public-api-key');
         $orders = $api->getOrders();
 
         $this->assertIsArray($orders);
