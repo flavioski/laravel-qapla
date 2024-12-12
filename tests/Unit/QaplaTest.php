@@ -91,6 +91,20 @@ class QaplaTest extends TestCase
         $this->assertIsArray($channel);
     }
 
+    public function testGetChannelWithDataParameterReturnArray()
+    {
+        $mockApi = $this->createMock(QaplaApiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('getChannel')
+            ->with('data')
+            ->willReturn(['id' => 1]);
+
+        $qapla = new Qapla($mockApi);
+        $channel = $qapla->getChannel('data');
+
+        $this->assertIsArray($channel);
+    }
+
     public function testGetOrdersReturnsArray()
     {
         $mockApi = $this->createMock(QaplaApiInterface::class);
