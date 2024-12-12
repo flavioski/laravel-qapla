@@ -1,12 +1,14 @@
 name: PHP Pipeline
-
 on: [push, pull_request]
 
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.event_name }}-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       max-parallel: 2
       matrix:
@@ -26,9 +28,7 @@ jobs:
             laravel: '7.*'
           - php-versions: '8.0'
             laravel: '8.*'
-
     name: PHP ${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -67,3 +67,39 @@ jobs:
 
       #- name: Run test suite
       #  run: composer run-script test
+
+  # Check the PHP code follow the coding standards
+  php-cs-fixer:
+    permissions:
+      contents: read  # for actions/checkout to fetch code
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer Directory
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Validate composer config
+        run: composer validate --strict
+
+      - name: Composer Install
+        run: COMPOSER_PROCESS_TIMEOUT=600 composer install --ansi --prefer-dist --no-interaction --no-progress
+
+      - name: Run PHP-CS-Fixer
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
