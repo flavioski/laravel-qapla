@@ -27,6 +27,56 @@ use W3design\Qapla\Api\QaplaApiInterface;
 
 class QaplaTest extends TestCase
 {
+    public function testGetPrivateApiKey()
+    {
+        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('getPrivateApiKey')
+            ->willReturn('private-key');
+
+        $qapla = new Qapla($mockApi);
+        $privateApiKey = $qapla->getPrivateApiKey();
+
+        $this->assertIsString($privateApiKey);
+        $this->assertEquals('private-key', $privateApiKey);
+    }
+
+    public function testSetPrivateApiKey()
+    {
+        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('setPrivateApiKey')
+            ->with('new-private-key');
+
+        $qapla = new Qapla($mockApi);
+        $qapla->setPrivateApiKey('new-private-key');
+    }
+
+    public function testGetPublicApiKey()
+    {
+        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('getPublicApiKey')
+            ->willReturn('public-key');
+
+        $qapla = new Qapla($mockApi);
+        $publicApiKey = $qapla->getPublicApiKey();
+
+        $this->assertIsString($publicApiKey);
+        $this->assertEquals('public-key', $publicApiKey);
+    }
+
+    public function testSetPublicApiKey()
+    {
+        $mockApi = $this->createMock(QaplaAPiInterface::class);
+        $mockApi->expects($this->once())
+            ->method('setPublicApiKey')
+            ->with('new-public-key');
+
+        $qapla = new Qapla($mockApi);
+        $qapla->setPublicApiKey('new-public-key');
+    }
+
     public function testGetOrdersReturnsArray()
     {
         $mockApi = $this->createMock(QaplaAPiInterface::class);
