@@ -22,8 +22,12 @@ declare(strict_types=1);
 
 namespace W3design\Qapla;
 
+use W3design\Qapla\Api\OrderApiV12Interface;
+use W3design\Qapla\Api\OrderApiV13Interface;
 use W3design\Qapla\Api\QaplaApiFactory;
 use W3design\Qapla\Api\QaplaApiInterface;
+use W3design\Qapla\Dto\GetOrderV12Request;
+use W3design\Qapla\Dto\GetOrderV13Request;
 
 class Qapla
 {
@@ -71,8 +75,16 @@ class Qapla
         return $this->api->getChannel($data);
     }
 
-    public function getOrders(): array
+    public function getOrder(object $request): array
     {
-        return $this->api->getOrders();
+        if ($this->api instanceof OrderApiV12Interface && $request instanceof GetOrderV12Request) {
+            return $this->api->getOrderV12($request);
+        }
+
+        if ($this->api instanceof OrderApiV13Interface && $request instanceof GetOrderV13Request) {
+            return $this->api->getOrderV13($request);
+        }
+
+        throw new \RuntimeException('L\'API corrente o il request non sono supportati.');
     }
 }
