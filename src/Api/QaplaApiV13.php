@@ -119,7 +119,10 @@ class QaplaApiV13 implements QaplaApiInterface
                 ],
             ]);
 
-            return ['status' => $response->getStatusCode(), 'body' => $response->getBody()->getContents()];
+            return [
+                'status' => $response->getStatusCode(),
+                'body' => json_decode($response->getBody()->getContents(), true),
+            ];
         } catch (GuzzleException $e) {
             return ['status' => $e->getCode(), 'body' => $e->getMessage()];
         }
@@ -292,7 +295,10 @@ class QaplaApiV13 implements QaplaApiInterface
                 ],
             ]);
 
-            return ['status' => $response->getStatusCode(), 'body' => $response->getBody()->getContents()];
+            return [
+                'status' => $response->getStatusCode(),
+                'body' => json_decode($response->getBody()->getContents(), true),
+            ];
         } catch (GuzzleException $e) {
             return ['status' => $e->getCode(), 'body' => $e->getMessage()];
         }
@@ -329,7 +335,10 @@ class QaplaApiV13 implements QaplaApiInterface
                 ],
             ]);
 
-            return ['status' => $response->getStatusCode(), 'body' => $response->getBody()->getContents()];
+            return [
+                'status' => $response->getStatusCode(),
+                'body' => json_decode($response->getBody()->getContents(), true),
+            ];
         } catch (GuzzleException $e) {
             return ['status' => $e->getCode(), 'body' => $e->getMessage()];
         }
