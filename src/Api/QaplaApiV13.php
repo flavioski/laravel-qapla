@@ -24,9 +24,10 @@ namespace W3design\Qapla\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use W3design\Qapla\Dto\GetOrderV13Request;
 use W3design\Qapla\Qapla;
 
-class QaplaApiV13 implements QaplaApiInterface
+class QaplaApiV13 implements QaplaApiInterface, OrderApiV13Interface
 {
     /** @var Client */
     private $client;
@@ -278,12 +279,20 @@ class QaplaApiV13 implements QaplaApiInterface
      * @required string $reference
      * @optional string $data
      *
-     * @param $reference
-     * @param $data
+     * @param GetOrderV13Request $request
      * @return array
      */
-    public function getOrder($reference, $data = null): array
+    public function getOrderV13(GetOrderV13Request $request): array
     {
+        $query = [
+            'apiKey' => $request->getApiKey(),
+            'reference' => $request->getReference(),
+        ];
+
+        if ($request->getData() !== null) {
+            $query['data'] = $request->getData();
+        }
+
         try {
             $response = $this->client->get('getOrder', [
                 'headers' => [
