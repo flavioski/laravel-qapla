@@ -29,13 +29,13 @@ use W3design\Qapla\Dto\GetOrderV12Request;
 class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
 {
     /** @var Client */
-    private $client;
+    private Client $client;
 
     /** @var string */
-    private $privateApiKey;
+    private string $privateApiKey;
 
     /** @var string */
-    private $publicApiKey;
+    private string $publicApiKey;
 
     /**
      * Constructor.
@@ -45,7 +45,13 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
      */
     public function __construct(string $privateApiKey, string $publicApiKey)
     {
-        $this->client = new Client(['base_uri' => 'https://api.qapla.it/1.2/']);
+        $this->client = new Client([
+            'base_uri' => 'https://api.qapla.it/1.2/',
+            'headers' => [
+                'Authorization' => 'Bearer ' . $privateApiKey,
+            ],
+        ]);
+
         $this->privateApiKey = $privateApiKey;
         $this->publicApiKey = $publicApiKey;
     }
@@ -110,9 +116,6 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
     {
         try {
             $response = $this->client->get('getChannel', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->privateApiKey,
-                ],
                 'query' => [
                     'apiKey' => $this->privateApiKey,
                     'data' => $data,
@@ -235,9 +238,6 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
     {
         try {
             $response = $this->client->post('pushOrder', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->privateApiKey,
-                ],
                 'json' => $data,
             ]);
 
@@ -276,13 +276,7 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
 
         try {
             $response = $this->client->get('getOrder', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->privateApiKey,
-                ],
-                'query' => [
-                    'apiKey' => $this->privateApiKey,
-                    'reference' => $reference,
-                ],
+                'query' => $query,
             ]);
 
             return [
@@ -317,9 +311,6 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
     {
         try {
             $response = $this->client->get('getOrders', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->privateApiKey,
-                ],
                 'query' => [
                     'apiKey' => $this->privateApiKey,
                 ],
