@@ -257,7 +257,7 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
      * @required string $apiKey
      * @required string $reference | $orderID
      *
-     * @param $reference
+     * @param GetOrderV12Request $request
      * @return array
      */
     public function getOrderV12(GetOrderV12Request $request): array
