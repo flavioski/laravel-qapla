@@ -29,7 +29,4 @@ interface QaplaApiInterface
     public function getPublicApiKey(): string;
     public function setPublicApiKey(string $publicApiKey): self;
     public function getChannel(string $data = null): array;
-    public function pushOrder(array $data): array;
-    public function getOrder(string $reference): array;
-    public function getOrders(): array;
 }

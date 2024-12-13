@@ -231,7 +231,7 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
      * @param $data
      * @return array
      */
-    public function pushOrder($data): array
+    /*public function pushOrderV12($data): array
     {
         try {
             $response = $this->client->post('pushOrder', [
@@ -245,7 +245,7 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
         } catch (GuzzleException $e) {
             return ['status' => $e->getCode(), 'body' => $e->getMessage()];
         }
-    }
+    }*/
 
     /**
      * *getOrder*
@@ -313,7 +313,7 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
      *
      * @return array
      */
-    public function getOrders(): array
+    /*public function getOrdersV12(): array
     {
         try {
             $response = $this->client->get('getOrders', [
@@ -332,5 +332,5 @@ class QaplaApiV12 implements QaplaApiInterface, OrderApiV12Interface
         } catch (GuzzleException $e) {
             return ['status' => $e->getCode(), 'body' => $e->getMessage()];
         }
-    }
+    }*/
 }
