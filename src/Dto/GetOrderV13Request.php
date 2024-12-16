@@ -38,7 +38,7 @@ class GetOrderV13Request
      *
      * @return void
      */
-    public function __constructor(
+    public function __construct(
         string $apiKey,
         string $reference,
         ?string $data = null
