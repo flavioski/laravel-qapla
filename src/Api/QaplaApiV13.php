@@ -286,8 +286,15 @@ class QaplaApiV13 implements QaplaApiInterface, OrderApiV13Interface
     {
         $query = [
             'apiKey' => $request->getApiKey(),
-            'reference' => $request->getReference(),
         ];
+
+        if ($request->getReference() !== null && $request->getOrderID() === null) {
+            $query['reference'] = $request->getReference();
+        }
+
+        if ($request->getOrderID() !== null && $request->getReference() === null) {
+            $query['orderID'] = $request->getOrderID();
+        }
 
         if ($request->getData() !== null) {
             $query['data'] = $request->getData();

@@ -26,25 +26,30 @@ class GetOrderV13Request
 {
     /** @var string */
     private string $apiKey;
-    /** @var string */
-    private string $reference;
+    /** @var string|null */
+    private ?string $reference;
+    /** @var string|null */
+    private ?string $orderID;
     /** @var string|null */
     private ?string $data;
 
     /**
      * @param string $apiKey
-     * @param string $reference
+     * @param string|null $reference
+     * @param string|null $orderID
      * @param string|null $data
      *
      * @return void
      */
     public function __construct(
         string $apiKey,
-        string $reference,
+        ?string $reference,
+        ?string $orderID = null,
         ?string $data = null
     ) {
         $this->apiKey = $apiKey;
         $this->reference = $reference;
+        $this->orderID = $orderID;
         $this->data = $data;
     }
 
@@ -57,11 +62,19 @@ class GetOrderV13Request
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOrderID(): ?string
+    {
+        return $this->orderID;
     }
 
     /**
