@@ -85,6 +85,6 @@ class Qapla
             return $this->api->getOrderV13($request);
         }
 
-        throw new \RuntimeException('L\'API corrente o il request non sono supportati.');
+        throw new \RuntimeException('L\'API corrente o il tipo di request non sono supportati.');
     }
 }
