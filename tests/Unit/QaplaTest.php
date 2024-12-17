@@ -23,7 +23,11 @@ declare(strict_types=1);
 namespace Unit;
 
 use PHPUnit\Framework\TestCase;
+use W3design\Qapla\Api\OrderApiV12Interface;
+use W3design\Qapla\Api\OrderApiV13Interface;
 use W3design\Qapla\Api\QaplaApiInterface;
+use W3design\Qapla\Dto\GetOrderV12Request;
+use W3design\Qapla\Dto\GetOrderV13Request;
 use W3design\Qapla\Qapla;
 
 class QaplaTest extends TestCase
@@ -105,17 +109,61 @@ class QaplaTest extends TestCase
         $this->assertIsArray($channel);
     }
 
-    public function testGetOrdersReturnsArray()
+    public function testGetOrderWithV12InterfaceAndV12Request()
     {
-        $mockApi = $this->createMock(QaplaApiInterface::class);
-        $mockApi->expects($this->once())
-            ->method('getOrders')
-            ->willReturn([['id' => 1], ['id' => 2]]);
+        $mockApiV12 = $this->createMock(OrderApiV12Interface::class);
+        $mockApiV12->expects($this->once())
+            ->method('getOrderV12')
+            ->willReturn([['order_id' => 1]])
+        ;
 
-        $qapla = new Qapla($mockApi);
-        $orders = $qapla->getOrders();
+        $qapla = new Qapla($mockApiV12);
+
+        $request = new GetOrderV12Request(
+            'test-api-key',
+            'REF123',
+        );
+
+        $orders = $qapla->getOrder($request);
 
         $this->assertIsArray($orders);
-        $this->assertCount(2, $orders);
+        $this->assertEquals([['order_id' => 1]], $orders);
+    }
+
+    public function testGetOrderWithV13InterfaceAndV13Request()
+    {
+        $mockApiV13 = $this->createMock(OrderApiV13Interface::class);
+        $mockApiV13->expects($this->once())
+            ->method('getOrderV13')
+            ->willReturn([['order_id' => 2]])
+        ;
+
+        $qapla = new Qapla($mockApiV13);
+
+        $request = new GetOrderV13Request(
+            'test-api-key',
+            'REF456',
+            null,
+            'all'
+        );
+
+        $orders = $qapla->getOrder($request);
+
+        $this->assertIsArray($orders);
+        $this->assertEquals([['order_id' => 2]], $orders);
+    }
+
+    public function testGetOrderWithMismatchedRequestAndInterfaceThrowsException()
+    {
+        // Supponiamo di avere un'istanza V12 ma passiamo un DTO V13
+        $mockApiV12 = $this->createMock(OrderApiV12Interface::class);
+        $qapla = new Qapla($mockApiV12);
+
+        $request = new GetOrderV13Request('test-api-key', 'REF123');
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('L\'API corrente o il tipo di request non sono supportati.');
+
+        $qapla->getOrder($request);
     }
 }

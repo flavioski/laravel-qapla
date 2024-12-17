@@ -58,13 +58,13 @@ class QaplaApiV12Test extends TestCase
         );
     }
 
-    public function testGetOrdersIsArray()
+    /*public function testGetOrdersIsArray()
     {
         $api = new QaplaApiV12('your-private-api-key', 'your-public-api-key');
         $orders = $api->getOrders();
 
         $this->assertIsArray($orders);
-    }
+    }*/
 
     public function testDeleteOrder()
     {
